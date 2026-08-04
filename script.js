@@ -2,7 +2,11 @@
 // Este controlador fuerza un desplazamiento suave dentro del HTML incrustado.
 const formularioPago = document.querySelector("#formulario-pago")?.href;
 document.querySelectorAll(".form-link").forEach((link) => {
-  if (formularioPago) link.href = formularioPago;
+  if (formularioPago) {
+    link.href = formularioPago;
+    link.target = "_blank";
+    link.rel = "noopener";
+  }
 });
 
 document.querySelectorAll(".scroll-link").forEach((link) => {
