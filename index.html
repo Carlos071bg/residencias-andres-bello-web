@@ -30,8 +30,8 @@
         <aside class="amount-card">
           <span class="icon-circle">$</span>
           <p>Cuota mensual por apartamento</p>
-          <strong>$25<span>.00</span></strong>
-          <p class="bs-amount">Bs. 18.665,75 <small>Tasa referencial: Bs. 746,63/$</small></p>
+          <strong id="cuota-usd">$25.00</strong>
+          <p class="bs-amount"><span id="cuota-bs">Bs. 18.665,75</span> <small id="tasa-bcv">Tasa referencial: Bs. 746,63/$</small></p>
           <div></div>
           <small>Fecha límite de pago</small>
           <b>10 de agosto de 2026</b>
@@ -39,9 +39,9 @@
       </section>
 
       <section class="metrics" aria-label="Resumen financiero">
-        <article><span>Presupuesto mensual</span><strong>$575.00</strong><small>Bs. 429.312,25 · Agosto 2026</small></article>
+        <article><span>Presupuesto mensual</span><strong id="presupuesto-usd">$575.00</strong><small id="presupuesto-bs">Bs. 429.312,25 · Agosto 2026</small></article>
         <article><span>Apartamentos</span><strong>25</strong><small>Torre A</small></article>
-        <article><span>Cuota establecida</span><strong>$25.00</strong><small>Bs. 18.665,75 por apartamento</small></article>
+        <article><span>Cuota establecida</span><strong id="cuota-usd-resumen">$25.00</strong><small id="cuota-bs-resumen">Bs. 18.665,75 por apartamento</small></article>
       </section>
 
       <section class="section-grid" id="resumen">
@@ -56,12 +56,12 @@
             <div><span>Luz y otros servicios</span><b>$60.00</b></div>
             <div><span>Gastos comunes</span><b>$130.00</b></div>
           </div>
-          <footer><span>Total presupuestado</span><strong>$575.00 · Bs. 429.312,25</strong></footer>
+          <footer><span>Total presupuestado</span><strong id="total-presupuesto">$575.00 · Bs. 429.312,25</strong></footer>
         </article>
 
         <article class="panel status-panel">
           <p class="eyebrow">COBRANZA</p><h2>Estado de pagos</h2>
-          <div class="progress-ring"><div><strong>0%</strong><span>recibido</span></div></div>
+          <div class="progress-ring"><div><strong id="porcentaje-cobrado">0%</strong><span id="pagos-aprobados">recibido</span></div></div>
           <p class="status-copy">El control de los pagos se actualiza luego de validar cada comprobante.</p>
           <a class="text-link" href="https://docs.google.com/forms/d/e/1FAIpQLSe9DGuaUtaWF4WO4DJ9DgAh0t8BMmfnsXHeLed1Wag_UKDj8g/viewform?usp=header" target="_blank" rel="noopener">Registrar comprobante <span>→</span></a>
         </article>
