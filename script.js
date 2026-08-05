@@ -37,11 +37,18 @@ if (ENDPOINT_PRESUPUESTO) {
       poner("cuota-usd-resumen", usd(datos.cuotaUsd)); poner("cuota-bs-resumen", `${bs(datos.cuotaBs)} por apartamento`);
       poner("total-presupuesto", `${usd(datos.totalUsd)} · ${bs(datos.totalBs)}`);
       poner("porcentaje-cobrado", `${datos.porcentajeCobrado}%`); poner("pagos-aprobados", `${datos.pagosAprobados} pagos aprobados`);
-      document.querySelectorAll(".expenses div").forEach((fila) => {
-        const concepto = fila.querySelector("span")?.textContent?.trim().toLowerCase();
-        const gasto = datos.gastos.find((item) => item.concepto.toLowerCase() === concepto);
-        if (gasto) fila.querySelector("b").textContent = `${usd(gasto.usd)} · ${bs(gasto.bs)}`;
-      });
+      const listaGastos = document.querySelector(".expenses");
+      if (listaGastos && Array.isArray(datos.gastos)) {
+        listaGastos.replaceChildren(...datos.gastos.map((gasto) => {
+          const fila = document.createElement("div");
+          const concepto = document.createElement("span");
+          const monto = document.createElement("b");
+          concepto.textContent = gasto.concepto;
+          monto.textContent = `${usd(gasto.usd)} · ${bs(gasto.bs)}`;
+          fila.append(concepto, monto);
+          return fila;
+        }));
+      }
     })
     .catch(() => console.warn("No se pudo actualizar el presupuesto desde Google Sheets."));
 }
