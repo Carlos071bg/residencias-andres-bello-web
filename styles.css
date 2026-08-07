@@ -17,8 +17,31 @@ h1,h2,p { margin-top:0; } h1 { margin-bottom:18px; max-width:620px; font-size:cl
 .section-grid { display:grid; grid-template-columns:1.45fr .8fr; gap:24px; }.panel { border:1px solid var(--line); border-radius:15px; background:#fff; }.expense-panel { overflow:hidden; }.panel-heading { display:flex; justify-content:space-between; align-items:start; padding:27px 28px 18px; }.panel h2 { margin:0; font-size:23px; letter-spacing:-.6px; }.month { padding:7px 10px; border-radius:7px; color:var(--mint-dark); background:#e9faf6; font-size:10px; font-weight:800; letter-spacing:.8px; }.expenses { padding:0 28px; }.expenses div { display:flex; justify-content:space-between; padding:13px 0; border-bottom:1px solid #edf1f0; color:#4e6475; font-size:14px; }.expenses b { color:var(--ink); }.expense-panel footer { display:flex; justify-content:space-between; margin-top:6px; padding:20px 28px; color:#fff; background:var(--navy); }.expense-panel footer strong { font-size:19px; }
 .status-panel { padding:28px; text-align:center; }.status-panel h2 { text-align:left; }.progress-ring { display:grid; place-items:center; width:152px; height:152px; margin:28px auto 20px; border-radius:50%; background:conic-gradient(var(--mint) 0deg, #eaf0ef 0deg); }.progress-ring>div { display:grid; place-items:center; width:126px; height:126px; border-radius:50%; background:#fff; }.progress-ring strong { font-size:27px; }.progress-ring span { color:var(--muted); font-size:11px; }.status-copy { color:var(--muted); font-size:13px; line-height:1.55; }.text-link { color:var(--mint-dark); font-size:13px; font-weight:bold; text-decoration:none; }
 .payment { display:flex; justify-content:space-between; align-items:center; gap:30px; margin-top:24px; padding:34px; border-radius:15px; color:#fff; background:linear-gradient(120deg,#123450,#1d506e); }.payment h2 { margin-bottom:8px; font-size:26px; }.payment p { max-width:550px; margin-bottom:0; color:#d7e2e8; font-size:14px; line-height:1.5; }.payment .eyebrow { color:#89e6d2; }.payment-actions { min-width:275px; }.payment-actions .primary { width:100%; margin:0; background:#fff; color:var(--navy); }.payment-actions .primary:hover { background:#effaf8; }.payment-actions p { margin:13px 2px 0; font-size:11px; }.check { color:#8eead8; font-weight:bold; }
+.rate-panel { display:flex; align-items:center; justify-content:space-between; gap:30px; margin-top:24px; padding:31px 34px; border:1px solid #bcece2; border-radius:15px; background:#eafaf6; }.rate-panel h2 { margin:0 0 8px; font-size:26px; }.rate-panel>div>p:not(.eyebrow) { max-width:560px; margin:0; color:var(--muted); font-size:14px; line-height:1.55; }.rate-value { min-width:290px; padding:19px 22px; border-radius:12px; color:#fff; background:var(--mint-dark); }.rate-value span,.rate-value small { display:block; }.rate-value span { color:#d7fff6; font-size:12px; }.rate-value strong { display:block; margin:5px 0 6px; font-size:29px; letter-spacing:-.8px; }.rate-value small { color:#d7fff6; font-size:11px; line-height:1.4; }
 .help { display:flex; align-items:center; justify-content:space-between; gap:22px; margin-top:24px; padding:28px; border:1px solid var(--line); border-radius:15px; background:#fff; }.help>div { display:flex; align-items:center; gap:16px; }.help-icon { display:grid; place-items:center; flex:0 0 auto; width:39px; height:39px; border-radius:50%; color:var(--mint-dark); background:#e8faf6; font-size:21px; font-weight:bold; }.help h2 { margin:0 0 5px; font-size:18px; }.help p { max-width:580px; margin:0; color:var(--muted); font-size:13px; line-height:1.5; }.outline { color:var(--navy); border:1px solid #bfd0d4; white-space:nowrap; }.outline:hover { background:#f2f8f7; } footer { padding:27px; color:#81909a; border-top:1px solid var(--line); background:#fff; text-align:center; font-size:12px; }
-@media (max-width:720px) { .topbar { height:auto; padding:17px 22px; }.topbar nav { display:none; } main { padding:36px 18px 48px; }.hero,.section-grid { grid-template-columns:1fr; gap:28px; }.hero { min-height:0; }.amount-card { max-width:430px; }.metrics { grid-template-columns:1fr; }.metrics article { border-right:0; border-bottom:1px solid var(--line); }.metrics article:last-child { border-bottom:0; }.payment,.help { display:block; padding:26px; }.payment-actions { min-width:0; margin-top:22px; }.help .outline { width:100%; margin-top:22px; } h1 { letter-spacing:-2px; } }
+@media (max-width:720px) {
+  .topbar { height:auto; padding:13px 15px; }
+  .topbar nav { display:none; }
+  .brand-mark { width:34px; height:34px; border-radius:9px; font-size:13px; }
+  .brand strong { font-size:13px; }.brand small { font-size:9px; }
+  main { padding:25px 14px 38px; }
+  .hero,.section-grid { grid-template-columns:1fr; gap:21px; }
+  .hero { min-height:0; }.hero-copy { font-size:15px; line-height:1.5; }
+  h1 { margin-bottom:13px; font-size:39px; letter-spacing:-1.8px; }
+  .eyebrow { margin-bottom:8px; font-size:9px; }
+  .button { padding:12px 15px; font-size:13px; }
+  .amount-card { max-width:430px; padding:22px; border-radius:15px; }
+  .amount-card p { margin-top:15px; }.amount-card strong { font-size:32px; }
+  .metrics { grid-template-columns:1fr; margin:28px 0 18px; }
+  .metrics article { padding:16px 19px; border-right:0; border-bottom:1px solid var(--line); }
+  .metrics article:last-child { border-bottom:0; }.metrics strong { margin:5px 0 2px; font-size:22px; }
+  .panel-heading,.status-panel { padding:21px; }.expenses { padding:0 21px; }
+  .expenses div { padding:10px 0; font-size:13px; }.expense-panel footer { padding:16px 21px; }
+  .progress-ring { width:130px; height:130px; margin:21px auto 15px; }.progress-ring>div { width:108px; height:108px; }
+  .payment,.rate-panel,.help { display:block; padding:22px; }.payment h2,.rate-panel h2 { font-size:23px; }
+  .payment-actions { min-width:0; margin-top:18px; }.help .outline { width:100%; margin-top:18px; }
+  .rate-value { min-width:0; margin-top:18px; }
+}
 
 .amount-card .bs-amount { margin:4px 0 0; color:#fff; font-size:13px; font-weight:bold; }
 .amount-card .bs-amount small { display:block; margin-top:3px; color:#e2fffa; font-size:10px; font-weight:normal; }
