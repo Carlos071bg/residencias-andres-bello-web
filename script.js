@@ -1,14 +1,3 @@
-// Google Sites a veces no procesa enlaces internos de un bloque incorporado.
-// Este controlador fuerza un desplazamiento suave dentro del HTML incrustado.
-const formularioPago = document.querySelector("#formulario-pago")?.href;
-document.querySelectorAll(".form-link").forEach((link) => {
-  if (formularioPago) {
-    link.href = formularioPago;
-    link.target = "_blank";
-    link.rel = "noopener";
-  }
-});
-
 document.querySelectorAll(".scroll-link").forEach((link) => {
   link.addEventListener("click", (event) => {
     const targetId = link.getAttribute("href");
@@ -32,7 +21,8 @@ if (ENDPOINT_PRESUPUESTO) {
     .then((datos) => {
       if (datos.error) throw new Error(datos.error);
       poner("cuota-usd", usd(datos.cuotaUsd)); poner("cuota-bs", bs(datos.cuotaBs));
-      poner("tasa-bcv", `Tasa referencial: ${bs(datos.tasaBcv)}/$`);
+      poner("tasa-bcv", `Tasa BCV: ${bs(datos.tasaBcv)}/$`);
+      poner("tasa-bcv-card", `${bs(datos.tasaBcv)}/$`);
       poner("presupuesto-usd", usd(datos.totalUsd)); poner("presupuesto-bs", `${bs(datos.totalBs)} · Actualizado desde Sheets`);
       poner("cuota-usd-resumen", usd(datos.cuotaUsd)); poner("cuota-bs-resumen", `${bs(datos.cuotaBs)} por apartamento`);
       poner("total-presupuesto", `${usd(datos.totalUsd)} · ${bs(datos.totalBs)}`);
