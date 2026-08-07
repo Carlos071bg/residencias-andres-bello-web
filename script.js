@@ -26,7 +26,8 @@ if (ENDPOINT_PRESUPUESTO) {
       poner("presupuesto-usd", usd(datos.totalUsd)); poner("presupuesto-bs", `${bs(datos.totalBs)} · Actualizado desde Sheets`);
       poner("cuota-usd-resumen", usd(datos.cuotaUsd)); poner("cuota-bs-resumen", `${bs(datos.cuotaBs)} por apartamento`);
       poner("total-presupuesto", `${usd(datos.totalUsd)} · ${bs(datos.totalBs)}`);
-      poner("porcentaje-cobrado", `${datos.porcentajeCobrado}%`); poner("pagos-aprobados", `${datos.pagosAprobados} pagos aprobados`);
+      poner("porcentaje-cobrado", `${datos.porcentajeCobrado}%`);
+      poner("pagos-aprobados", datos.pagosAprobados === 1 ? "1 pago aprobado" : `${datos.pagosAprobados} pagos aprobados`);
       const listaGastos = document.querySelector(".expenses");
       if (listaGastos && Array.isArray(datos.gastos)) {
         listaGastos.replaceChildren(...datos.gastos.map((gasto) => {
