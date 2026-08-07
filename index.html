@@ -14,7 +14,7 @@
       </a>
       <nav>
         <a class="scroll-link" href="#resumen">Resumen</a>
-        <a class="scroll-link" href="#pago">Reportar pago</a>
+        <a class="scroll-link" href="#tasa">Tasa BCV</a>
         <a class="scroll-link" href="#contacto">Contacto</a>
       </nav>
     </header>
@@ -63,22 +63,20 @@
           <p class="eyebrow">COBRANZA</p><h2>Estado de pagos</h2>
           <div class="progress-ring"><div><strong id="porcentaje-cobrado">0%</strong><span id="pagos-aprobados">recibido</span></div></div>
           <p class="status-copy">El control de los pagos se actualiza luego de validar cada comprobante.</p>
-          <a class="text-link" href="https://docs.google.com/forms/d/e/1FAIpQLSe9DGuaUtaWF4WO4DJ9DgAh0t8BMmfnsXHeLed1Wag_UKDj8g/viewform?usp=header" target="_blank" rel="noopener">Registrar comprobante <span>→</span></a>
         </article>
       </section>
 
-      <section class="payment" id="pago">
-        <div class="payment-title"><p class="eyebrow">PAGOS</p><h2>Reporta tu pago</h2><p>Completa el formulario seguro de Google. La administración recibirá tu comprobante para validarlo.</p></div>
-        <div class="payment-actions">
-          <!-- Reemplaza # por el vínculo del formulario de Google Forms publicado -->
-          <a id="formulario-pago" class="button primary form-link" href="https://docs.google.com/forms/d/e/1FAIpQLSe9DGuaUtaWF4WO4DJ9DgAh0t8BMmfnsXHeLed1Wag_UKDj8g/viewform?usp=header" target="_blank" rel="noopener">Abrir formulario de pago <span>↗</span></a>
-          <p><span class="check">✓</span> Nombre, apartamento, monto, referencia y comprobante.</p>
+      <section class="rate-panel" id="tasa">
+        <div>
+          <p class="eyebrow">REFERENCIA CAMBIARIA</p>
+          <h2>Tasa BCV del período</h2>
+          <p>Usa esta referencia para calcular el equivalente en bolívares de tu cuota mensual.</p>
         </div>
-      </section>
-
-      <section class="management-grid">
-        <article class="panel management-card"><span class="section-icon">▣</span><p class="eyebrow">ADMINISTRACIÓN</p><h2>Registro de facturas</h2><p>Registra proveedor, monto, fecha y enlace del soporte guardado en Drive. Uso exclusivo de administración.</p><a class="button outline invoice-link" href="https://docs.google.com/forms/d/e/1FAIpQLSeMqgD-62Hw0x5ZaLQ04TWGzSl8AVj0cvySc9HUVBxCnfIAZg/viewform" target="_blank" rel="noopener">Registrar factura <span>↗</span></a></article>
-        <article class="panel management-card"><span class="section-icon">✓</span><p class="eyebrow">CONTROL</p><h2>Registro de pagos</h2><p>La hoja de cobranza conserva quién pagó, referencia bancaria, fecha y comprobante validado.</p><a class="button outline payments-link" href="https://docs.google.com/spreadsheets/d/1PqAOskI8gL-Hc9duWZYZFlX-wWs3vIs_CJz97mc_jn0/edit?gid=329836006#gid=329836006" target="_blank" rel="noopener">Ver control de pagos <span>↗</span></a></article>
+        <div class="rate-value">
+          <span>Dólar estadounidense</span>
+          <strong id="tasa-bcv-card">Bs. 746,63/$</strong>
+          <small>Verifica la tasa antes de realizar tu pago.</small>
+        </div>
       </section>
 
       <section class="gallery">
