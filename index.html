@@ -26,7 +26,7 @@
     <main id="inicio">
       <section class="hero">
         <div>
-          <p class="eyebrow">ADMINISTRACIÓN · AGOSTO 2026</p>
+          <p class="eyebrow" id="periodo-hero">ADMINISTRACIÓN · CARGANDO PERÍODO</p>
           <h1>Tu condominio,<br /><em>claro y al día.</em></h1>
           <p class="hero-copy">Consulta el presupuesto de Torre A, su equivalente en bolívares y registra tu pago en pocos pasos.</p>
           <a class="button primary" href="https://docs.google.com/forms/d/e/1FAIpQLSe9DGuaUtaWF4WO4DJ9DgAh0t8BMmfnsXHeLed1Wag_UKDj8g/viewform?usp=header" target="_blank" rel="noopener">Reportar mi pago <span>→</span></a>
@@ -38,19 +38,19 @@
           <p class="bs-amount"><span id="cuota-bs">Bs. 18.665,75</span> <small id="tasa-bcv">Tasa referencial: Bs. 746,63/$</small></p>
           <div></div>
           <small>Fecha límite de pago</small>
-          <b>10 de agosto de 2026</b>
+          <b id="fecha-limite">Cargando fecha límite...</b>
         </aside>
       </section>
 
       <section class="metrics" aria-label="Resumen financiero">
-        <article><span>Presupuesto mensual</span><strong id="presupuesto-usd">$575.00</strong><small id="presupuesto-bs">Bs. 429.312,25 · Agosto 2026</small></article>
-        <article><span>Apartamentos</span><strong>25</strong><small>Torre A</small></article>
+        <article><span>Presupuesto mensual</span><strong id="presupuesto-usd">$575.00</strong><small id="presupuesto-bs">Actualizando desde Sheets...</small></article>
+        <article><span>Apartamentos</span><strong id="apartamentos">25</strong><small>Torre A</small></article>
         <article><span>Cuota establecida</span><strong id="cuota-usd-resumen">$25.00</strong><small id="cuota-bs-resumen">Bs. 18.665,75 por apartamento</small></article>
       </section>
 
       <section class="section-grid" id="resumen">
         <article class="panel expense-panel">
-          <div class="panel-heading"><div><p class="eyebrow">TRANSPARENCIA</p><h2>Presupuesto del mes</h2></div><span class="month">AGOSTO</span></div>
+          <div class="panel-heading"><div><p class="eyebrow">TRANSPARENCIA</p><h2>Presupuesto del mes</h2></div><span class="month" id="mes-presupuesto">CARGANDO</span></div>
           <div class="expenses">
             <div><span>Estimado gas</span><b>$145.00</b></div>
             <div><span>Estimado agua</span><b>$90.00</b></div>
@@ -94,6 +94,6 @@
       </section>
     </main>
     <footer>© 2026 Residencias Andrés Bello · Torre A</footer>
-    <script src="script.js?v=3"></script>
+    <script src="script.js?v=4"></script>
   </body>
 </html>
