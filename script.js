@@ -50,7 +50,13 @@ if (ENDPOINT_PRESUPUESTO) {
       poner("cuota-usd", usd(datos.cuotaUsd)); poner("cuota-bs", bs(datos.cuotaBs));
       poner("tasa-bcv", `Tasa BCV: ${bs(datos.tasaBcv)}/$`);
       poner("tasa-bcv-card", `${bs(datos.tasaBcv)}/$`);
-      poner("presupuesto-usd", usd(datos.totalUsd)); poner("presupuesto-bs", `${bs(datos.totalBs)} · Actualizado desde Sheets`);
+      const periodo = String(datos.periodo || "").trim();
+      const mes = periodo ? periodo.split(" ")[0].toUpperCase() : "PERÍODO ACTIVO";
+      poner("periodo-hero", `ADMINISTRACIÓN · ${periodo ? periodo.toUpperCase() : "PERÍODO ACTIVO"}`);
+      poner("mes-presupuesto", mes);
+      poner("fecha-limite", datos.fechaLimite || "Fecha por definir");
+      poner("apartamentos", datos.apartamentos || 0);
+      poner("presupuesto-usd", usd(datos.totalUsd)); poner("presupuesto-bs", `${bs(datos.totalBs)} · ${periodo || "Actualizado desde Sheets"}`);
       poner("cuota-usd-resumen", usd(datos.cuotaUsd)); poner("cuota-bs-resumen", `${bs(datos.cuotaBs)} por apartamento`);
       poner("total-presupuesto", `${usd(datos.totalUsd)} · ${bs(datos.totalBs)}`);
       poner("porcentaje-cobrado", `${datos.porcentajeCobrado}%`);
