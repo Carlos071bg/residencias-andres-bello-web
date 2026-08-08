@@ -3,6 +3,9 @@
 html { scroll-behavior:smooth; }
 body { margin:0; color:var(--ink); background:var(--cream); font-family:Arial,Helvetica,sans-serif; }
 .topbar { height:78px; display:flex; align-items:center; justify-content:space-between; padding:0 max(5vw,28px); border-bottom:1px solid var(--line); background:#fff; }
+.live-date { margin-left:auto; margin-right:38px; text-align:right; color:var(--muted); }
+.live-date span { display:block; color:var(--mint-dark); font-size:9px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; }
+.live-date strong { display:block; margin-top:3px; font-size:12px; font-weight:600; text-transform:capitalize; }
 .brand { display:flex; align-items:center; gap:11px; color:var(--ink); text-decoration:none; }
 .brand-mark { display:grid; place-items:center; width:40px; height:40px; border-radius:11px; background:var(--mint); color:#fff; font-weight:800; letter-spacing:-1px; }
 .brand strong,.brand small { display:block; }.brand strong { font-size:15px; }.brand small { margin-top:3px; font-size:11px; color:var(--muted); }
@@ -22,6 +25,8 @@ h1,h2,p { margin-top:0; } h1 { margin-bottom:18px; max-width:620px; font-size:cl
 @media (max-width:720px) {
   .topbar { height:auto; padding:13px 15px; }
   .topbar nav { display:none; }
+  .live-date { margin:0 0 0 auto; max-width:154px; line-height:1.35; }
+  .live-date strong { font-size:10px; }
   .brand-mark { width:34px; height:34px; border-radius:9px; font-size:13px; }
   .brand strong { font-size:13px; }.brand small { font-size:9px; }
   main { padding:25px 14px 38px; }
