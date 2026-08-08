@@ -10,6 +10,33 @@ document.querySelectorAll(".scroll-link").forEach((link) => {
 
 // Pega aquí la URL /exec de tu aplicación web de Apps Script después de desplegarla.
 // Mientras esté vacía, la web conserva los últimos valores visibles.
+// Reloj visible del portal. Usa siempre la zona horaria de Venezuela.
+const actualizarFechaHora = () => {
+  const nodo = document.getElementById("fecha-hora-actual");
+  if (!nodo) return;
+
+  const ahora = new Date();
+  const fecha = new Intl.DateTimeFormat("es-VE", {
+    timeZone: "America/Caracas",
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  }).format(ahora);
+  const hora = new Intl.DateTimeFormat("es-VE", {
+    timeZone: "America/Caracas",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: false,
+  }).format(ahora);
+
+  nodo.textContent = `${fecha} · ${hora}`;
+};
+
+actualizarFechaHora();
+window.setInterval(actualizarFechaHora, 1000);
+
 const ENDPOINT_PRESUPUESTO = "https://script.google.com/macros/s/AKfycbyM3Z3dYBaQcaKEdn588WaTM7wKp_8zE9KHqNciKmfNoqFx76-9TtV8EjHvx8OyVtrG9w/exec";
 const usd = (valor) => `$${Number(valor).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 const bs = (valor) => `Bs. ${Number(valor).toLocaleString("es-VE", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
