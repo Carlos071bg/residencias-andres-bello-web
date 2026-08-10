@@ -74,5 +74,12 @@ if (ENDPOINT_PRESUPUESTO) {
         }));
       }
     })
-    .catch(() => console.warn("No se pudo actualizar el presupuesto desde Google Sheets."));
+    .catch(() => {
+      console.warn("No se pudo actualizar el presupuesto desde Google Sheets.");
+      poner("periodo-hero", "ADMINISTRACIÓN · ERROR DE CONEXIÓN");
+      poner("mes-presupuesto", "SIN DATOS");
+      poner("tasa-bcv", "Tasa BCV: No disponible");
+      poner("tasa-bcv-card", "No disponible");
+      poner("fecha-limite", "Error de conexión");
+    });
 }
