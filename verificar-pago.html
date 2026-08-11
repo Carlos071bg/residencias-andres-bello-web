@@ -55,14 +55,20 @@
     var ENDPOINT = "https://script.google.com/macros/s/AKfycbyM3Z3dYBaQcaKEdn588WaTM7wKp_8zE9KHqNciKmfNoqFx76-9TtV8EjHvx8OyVtrG9w/exec";
     var FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSe9DGuaUtaWF4WO4DJ9DgAh0t8BMmfnsXHeLed1Wag_UKDj8g/viewform?usp=header";
 
-    // 1. Generar opciones de apartamentos (1-25)
+    // 1. Generar opciones de apartamentos (11-14, 21-24... 61-64)
     var selectApto = document.getElementById("apto");
-    for (var i = 1; i <= 25; i++) {
-      var opt = document.createElement("option");
-      opt.value = i;
-      opt.textContent = "Apartamento " + i;
-      selectApto.appendChild(opt);
-    }
+    var pisos = [1, 2, 3, 4, 5, 6];
+    var aptosPorPiso = [1, 2, 3, 4];
+    
+    pisos.forEach(function(piso) {
+      aptosPorPiso.forEach(function(numero) {
+        var aptoStr = piso.toString() + numero.toString();
+        var opt = document.createElement("option");
+        opt.value = aptoStr;
+        opt.textContent = "Apartamento " + aptoStr;
+        selectApto.appendChild(opt);
+      });
+    });
 
     // 2. Generar opciones de meses dinamicamente (desde Agosto 2026 hasta el mes actual + 1)
     var selectMes = document.getElementById("mes");
