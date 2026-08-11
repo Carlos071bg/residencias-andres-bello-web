@@ -1,196 +1,104 @@
 <!doctype html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Residencias Andrés Bello</title>
-  <meta name="description" content="Portal oficial de Residencias Andrés Bello. Información clara y transparente para todos los residentes." />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --mint: #14b899;
-      --mint-dark: #087965;
-      --navy: #123450;
-      --light: #f5f7f5;
-    }
-    body, html { margin: 0; padding: 0; font-family: 'Inter', sans-serif; background: var(--light); color: var(--navy); }
-    
-    /* Barra Superior para el Administrador */
-    .top-nav {
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      padding: 25px 40px;
-      display: flex;
-      justify-content: flex-end;
-      z-index: 10;
-    }
-    .admin-btn {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      color: white;
-      text-decoration: none;
-      font-size: 0.95rem;
-      font-weight: 600;
-      background: rgba(255, 255, 255, 0.15);
-      padding: 10px 18px;
-      border-radius: 50px;
-      backdrop-filter: blur(10px);
-      transition: all 0.3s;
-    }
-    .admin-btn:hover { background: rgba(255, 255, 255, 0.3); }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Residencias Andrés Bello | Torre A</title>
+    <meta name="description" content="Dashboard financiero de la Torre A de Residencias Andrés Bello. Consulta el presupuesto mensual, la tasa BCV y reporta tus pagos en línea de forma transparente." />
+    <meta name="keywords" content="condominio, residencias andrés bello, torre a, pagos, presupuesto, bcv, mérida" />
+    <meta property="og:title" content="Residencias Andrés Bello | Torre A" />
+    <meta property="og:description" content="Consulta el presupuesto mensual, la tasa BCV y reporta tus pagos en línea." />
+    <meta property="og:type" content="website" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#inicio" aria-label="Inicio">
+        <span class="brand-mark">RA</span>
+        <span><strong>Residencias Andrés Bello</strong><small>Torre A · Mérida, Venezuela</small></span>
+      </a>
+      <div class="live-date" aria-live="polite">
+        <span>Hora en Venezuela</span>
+        <strong id="fecha-hora-actual">Cargando fecha y hora...</strong>
+      </div>
+      <nav>
+        <a class="scroll-link" href="#resumen">Resumen</a>
+        <a class="scroll-link" href="#tasa">Tasa BCV</a>
+        <a class="scroll-link" href="#contacto">Contacto</a>
+      </nav>
+    </header>
 
-    /* Hero Section con tu imagen */
-    .hero {
-      position: relative;
-      height: 75vh;
-      min-height: 500px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      color: white;
-      background: url('imagenes/condominio-1.jpg') center/cover no-repeat;
-    }
-    
-    /* Filtro oscuro encima de la foto */
-    .hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to bottom, rgba(18, 52, 80, 0.75), rgba(18, 52, 80, 0.95));
-    }
-    
-    .hero-content {
-      position: relative;
-      z-index: 1;
-      max-width: 850px;
-      padding: 20px;
-      animation: fadeInUp 1s ease-out;
-    }
-    
-    .hero h1 { font-size: clamp(2.8rem, 6vw, 4.8rem); font-weight: 900; margin-bottom: 24px; line-height: 1.1; letter-spacing: -1.5px; }
-    .hero p { font-size: clamp(1.1rem, 2vw, 1.4rem); margin-bottom: 45px; color: #e2e8f0; line-height: 1.6; max-width: 700px; margin-left: auto; margin-right: auto; }
-    
-    .btn {
-      display: inline-block;
-      padding: 18px 36px;
-      background: var(--mint);
-      color: white;
-      text-decoration: none;
-      font-size: 1.25rem;
-      font-weight: 700;
-      border-radius: 50px;
-      transition: all 0.3s ease;
-      box-shadow: 0 10px 25px rgba(20, 184, 153, 0.4);
-    }
-    .btn:hover { background: var(--mint-dark); transform: translateY(-4px); box-shadow: 0 15px 35px rgba(20, 184, 153, 0.5); }
-    
-    /* Tarjetas de características */
-    .features {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 30px;
-      max-width: 1100px;
-      margin: -80px auto 80px;
-      padding: 0 24px;
-      position: relative;
-      z-index: 2;
-    }
-    
-    .feature-card {
-      background: white;
-      padding: 45px 35px;
-      border-radius: 24px;
-      text-align: center;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.06);
-      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
-    }
-    .feature-card:hover { transform: translateY(-12px); box-shadow: 0 30px 60px rgba(0,0,0,0.12); }
-    
-    .icon {
-      font-size: 3.5rem;
-      margin-bottom: 24px;
-      display: inline-block;
-      background: #e6f8f5;
-      width: 90px;
-      height: 90px;
-      line-height: 90px;
-      border-radius: 50%;
-      color: var(--mint-dark);
-    }
-    
-    .feature-card h3 { margin: 0 0 16px; font-size: 1.5rem; color: var(--navy); letter-spacing: -0.5px; }
-    .feature-card p { margin: 0; color: #64748b; line-height: 1.7; font-size: 1.05rem; }
-    
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(40px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    
-    footer { text-align: center; padding: 40px 20px; color: #94a3b8; font-size: 0.95rem; }
+    <main id="inicio">
+      <section class="hero">
+        <div>
+          <p class="eyebrow" id="periodo-hero">ADMINISTRACIÓN · CARGANDO PERÍODO</p>
+          <h1>Tu condominio,<br /><em>claro y al día.</em></h1>
+          <p class="hero-copy">Consulta el presupuesto de Torre A, su equivalente en bolívares y registra tu pago en pocos pasos.</p>
+          <a class="button primary" href="https://docs.google.com/forms/d/e/1FAIpQLSe9DGuaUtaWF4WO4DJ9DgAh0t8BMmfnsXHeLed1Wag_UKDj8g/viewform?usp=header" target="_blank" rel="noopener">Reportar mi pago <span>→</span></a>
+        </div>
+        <aside class="amount-card">
+          <span class="icon-circle">$</span>
+          <p>Cuota mensual por apartamento</p>
+          <strong id="cuota-usd">$25.00</strong>
+          <p class="bs-amount"><span id="cuota-bs">Bs. 18.665,75</span> <small id="tasa-bcv">Tasa referencial: Bs. 746,63/$</small></p>
+          <div></div>
+          <small>Fecha límite de pago</small>
+          <b id="fecha-limite">Cargando fecha límite...</b>
+        </aside>
+      </section>
 
-    /* Ajustes para Celulares */
-    @media (max-width: 768px) {
-      .hero {
-        height: auto;
-        min-height: 100vh;
-        padding-top: 80px;
-        padding-bottom: 120px;
-      }
-      .top-nav {
-        justify-content: center;
-        padding: 20px;
-      }
-      .features {
-        margin-top: -60px;
-      }
-      .btn {
-        padding: 16px 28px;
-        font-size: 1.1rem;
-      }
-    }
-  </style>
-</head>
-<body>
+      <section class="metrics" aria-label="Resumen financiero">
+        <article><span>Presupuesto mensual</span><strong id="presupuesto-usd">$575.00</strong><small id="presupuesto-bs">Actualizando desde Sheets...</small></article>
+        <article><span>Apartamentos</span><strong id="apartamentos">25</strong><small>Torre A</small></article>
+        <article><span>Cuota establecida</span><strong id="cuota-usd-resumen">$25.00</strong><small id="cuota-bs-resumen">Bs. 18.665,75 por apartamento</small></article>
+      </section>
 
-  <!-- Navegación superior con botón Admin -->
-  <nav class="top-nav">
-    <a href="https://sites.google.com/view/gestion-rab/p%C3%A1gina-principal?pli=1&authuser=5" class="admin-btn">
-      🔒 Acceso Administrador
-    </a>
-  </nav>
+      <section class="section-grid" id="resumen">
+        <article class="panel expense-panel">
+          <div class="panel-heading"><div><p class="eyebrow">TRANSPARENCIA</p><h2>Presupuesto del mes</h2></div><span class="month" id="mes-presupuesto">CARGANDO</span></div>
+          <div class="expenses">
+            <div><span>Estimado gas</span><b>$145.00</b></div>
+            <div><span>Estimado agua</span><b>$90.00</b></div>
+            <div><span>Limpieza de torre</span><b>$60.00</b></div>
+            <div><span>Limpieza de cuarto</span><b>$50.00</b></div>
+            <div><span>Mantenimiento</span><b>$40.00</b></div>
+            <div><span>Luz y otros servicios</span><b>$60.00</b></div>
+            <div><span>Gastos comunes</span><b>$130.00</b></div>
+          </div>
+          <footer><span>Total presupuestado</span><strong id="total-presupuesto">$575.00 · Bs. 429.312,25</strong></footer>
+        </article>
 
-  <header class="hero">
-    <div class="hero-content">
-      <h1>Bienvenidos a<br>Residencias Andrés Bello</h1>
-      <p>Información clara para los residentes de la Torre A: presupuesto mensual, pagos y comprobantes en un solo lugar de manera 100% transparente.</p>
-      <!-- Botón principal para los residentes -->
-      <a href="dashboard.html" class="btn">Entrar al Portal de Residentes &rarr;</a>
-    </div>
-  </header>
+        <article class="panel status-panel">
+          <p class="eyebrow">COBRANZA</p><h2>Estado de pagos</h2>
+          <div class="progress-ring"><div><strong id="porcentaje-cobrado">0%</strong><span id="pagos-aprobados">recibido</span></div></div>
+          <p class="status-copy">El control de los pagos se actualiza luego de validar cada comprobante.</p>
+        </article>
+      </section>
 
-  <section class="features">
-    <div class="feature-card">
-      <div class="icon">📊</div>
-      <h3>Presupuesto Mensual</h3>
-      <p>Revisa el desglose exacto de los gastos del mes y la cuota correspondiente a cada apartamento, calculado en tiempo real.</p>
-    </div>
-    <div class="feature-card">
-      <div class="icon">💸</div>
-      <h3>Reportar Pago</h3>
-      <p>Envía tus comprobantes de transferencia de manera rápida y segura directamente desde tu celular o computadora.</p>
-    </div>
-    <div class="feature-card">
-      <div class="icon">✅</div>
-      <h3>Transparencia Total</h3>
-      <p>Monitorea el estado de recaudación de la torre y verifica al instante si tu pago ha sido procesado y validado.</p>
-    </div>
-  </section>
+      <section class="rate-panel" id="tasa">
+        <div>
+          <p class="eyebrow">REFERENCIA CAMBIARIA</p>
+          <h2>Tasa BCV del período</h2>
+          <p>Usa esta referencia para calcular el equivalente en bolívares de tu cuota mensual.</p>
+        </div>
+        <div class="rate-value">
+          <span>Dólar estadounidense</span>
+          <strong id="tasa-bcv-card">Bs. 746,63/$</strong>
+          <small>Verifica la tasa antes de realizar tu pago.</small>
+        </div>
+      </section>
 
-  <footer>
-    &copy; 2026 Residencias Andrés Bello · Torre A. Administrado con tecnología web moderna.
-  </footer>
+      <section class="gallery">
+        <div><p class="eyebrow">NUESTRA COMUNIDAD</p><h2>Residencias Andrés Bello</h2><p>Un espacio para mantener informados a los vecinos y mostrar la vida de nuestra comunidad.</p></div>
+        <div class="gallery-grid"><figure><img src="imagenes/condominio-1.jpg" alt="Fachada de Residencias Andrés Bello"/><figcaption>Fachada principal</figcaption></figure><figure><img src="imagenes/condominio-2.jpg" alt="Áreas comunes de Residencias Andrés Bello"/><figcaption>Áreas comunes</figcaption></figure><figure><img src="imagenes/condominio-3.jpg" alt="Vista de Residencias Andrés Bello"/><figcaption>Nuestra torre</figcaption></figure></div>
+      </section>
 
-</body>
+      <section class="help" id="contacto">
+        <div><span class="help-icon">?</span><div><h2>¿Necesitas ayuda?</h2><p>Para consultas sobre tu cuota, pagos o comprobantes, comunícate con la administración de Torre A.</p></div></div>
+        <a class="button outline" href="mailto:administracion@residenciasandresbello.com">Contactar administración</a>
+      </section>
+    </main>
+    <footer>© 2026 Residencias Andrés Bello · Torre A</footer>
+    <script src="script.js?v=6"></script>
+  </body>
 </html>

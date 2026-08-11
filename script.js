@@ -131,11 +131,11 @@ const injectChatbot = () => {
   chatContainer.innerHTML = `
     <div id="bellobot-chat-window" class="hidden">
       <div class="chat-header">
-        <h4>BelloBot 🤖</h4>
+        <h4>Resi 🏠</h4>
         <button id="close-chat">&times;</button>
       </div>
       <div class="chat-messages" id="chat-messages">
-        <div class="message bot">¡Hola! Soy BelloBot. ¿En qué te puedo ayudar hoy?</div>
+        <div class="message bot">¡Hola! Soy Resi, tu asistente virtual. ¿En qué te puedo ayudar hoy?</div>
       </div>
       <div class="chat-input-area">
         <input type="text" id="chat-input" placeholder="Escribe tu mensaje..." autocomplete="off" />
