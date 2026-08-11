@@ -1,6 +1,3 @@
-html
-
-
 <!doctype html>
 <html lang="es">
 <head>
@@ -42,6 +39,7 @@ html
       transition: all 0.3s;
     }
     .admin-btn:hover { background: rgba(255, 255, 255, 0.3); }
+
     /* Hero Section con tu imagen */
     .hero {
       position: relative;
@@ -131,15 +129,38 @@ html
     }
     
     footer { text-align: center; padding: 40px 20px; color: #94a3b8; font-size: 0.95rem; }
+
+    /* Ajustes para Celulares */
+    @media (max-width: 768px) {
+      .hero {
+        height: auto;
+        min-height: 100vh;
+        padding-top: 80px;
+        padding-bottom: 120px;
+      }
+      .top-nav {
+        justify-content: center;
+        padding: 20px;
+      }
+      .features {
+        margin-top: -60px;
+      }
+      .btn {
+        padding: 16px 28px;
+        font-size: 1.1rem;
+      }
+    }
   </style>
 </head>
 <body>
+
   <!-- Navegación superior con botón Admin -->
   <nav class="top-nav">
     <a href="https://sites.google.com/view/gestion-rab/p%C3%A1gina-principal?pli=1&authuser=5" class="admin-btn">
       🔒 Acceso Administrador
     </a>
   </nav>
+
   <header class="hero">
     <div class="hero-content">
       <h1>Bienvenidos a<br>Residencias Andrés Bello</h1>
@@ -148,6 +169,7 @@ html
       <a href="dashboard.html" class="btn">Entrar al Portal de Residentes &rarr;</a>
     </div>
   </header>
+
   <section class="features">
     <div class="feature-card">
       <div class="icon">📊</div>
@@ -165,8 +187,10 @@ html
       <p>Monitorea el estado de recaudación de la torre y verifica al instante si tu pago ha sido procesado y validado.</p>
     </div>
   </section>
+
   <footer>
     &copy; 2026 Residencias Andrés Bello · Torre A. Administrado con tecnología web moderna.
   </footer>
+
 </body>
 </html>
