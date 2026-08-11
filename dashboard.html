@@ -1,11 +1,91 @@
 <!doctype html>
-<html lang="es">
-<head>
-<meta charset="UTF-8" />
-<meta http-equiv="refresh" content="0;url=index.html" />
-<title>Redirigiendo...</title>
-</head>
-<body>
-<p>Redirigiendo a la página principal... <a href="index.html">Haz clic aquí si no se redirige automáticamente.</a></p>
-</body>
+<html lang="es" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Residencias Andrés Bello | Torre A</title>
+    <meta name="description" content="Dashboard financiero de la Torre A de Residencias Andrés Bello. Consulta el presupuesto mensual, la tasa BCV y reporta tus pagos en línea de forma transparente." />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#inicio" aria-label="Inicio">
+        <span class="brand-mark">RA</span>
+        <span><strong>Residencias Andrés Bello</strong><small>Torre A · Mérida, Venezuela</small></span>
+      </a>
+      <div class="live-date" aria-live="polite">
+        <span>Hora en Venezuela</span>
+        <strong id="fecha-hora-actual">Cargando fecha y hora...</strong>
+      </div>
+      <nav>
+        <button id="theme-toggle" aria-label="Cambiar tema">🌙</button>
+        <a class="scroll-link" href="#resumen">Resumen</a>
+        <a class="scroll-link" href="#tasa">Tasa BCV</a>
+        <a class="scroll-link" href="#contacto">Contacto</a>
+      </nav>
+    </header>
+    <main id="inicio">
+      <section class="hero">
+        <div>
+          <p class="eyebrow" id="periodo-hero">ADMINISTRACIÓN · CARGANDO PERÍODO</p>
+          <h1>Tu condominio,<br /><em>claro y al día.</em></h1>
+          <p class="hero-copy">Consulta el presupuesto de Torre A, su equivalente en bolívares y registra tu pago en pocos pasos.</p>
+          <a class="button primary" href="https://docs.google.com/forms/d/e/1FAIpQLSe9DGuaUtaWF4WO4DJ9DgAh0t8BMmfnsXHeLed1Wag_UKDj8g/viewform?usp=header" target="_blank" rel="noopener">Reportar mi pago <span>→</span></a>
+        </div>
+        <aside class="amount-card hover-3d">
+          <span class="icon-circle">$</span>
+          <p>Cuota mensual por apartamento</p>
+          <strong id="cuota-usd" class="skeleton">00.00</strong>
+          <p class="bs-amount"><span id="cuota-bs" class="skeleton">Bs. 000.00</span> <small id="tasa-bcv" class="skeleton">Tasa referencial: Bs. 000/$</small></p>
+          <div></div>
+          <small>Fecha límite de pago</small>
+          <b id="fecha-limite" class="skeleton">Cargando...</b>
+        </aside>
+      </section>
+      <section class="metrics hover-3d" aria-label="Resumen financiero">
+        <article><span>Presupuesto mensual</span><strong id="presupuesto-usd" class="skeleton">000.00</strong><small id="presupuesto-bs" class="skeleton">Actualizando...</small></article>
+        <article><span>Apartamentos</span><strong id="apartamentos" class="skeleton">00</strong><small>Torre A</small></article>
+        <article><span>Cuota establecida</span><strong id="cuota-usd-resumen" class="skeleton">00.00</strong><small id="cuota-bs-resumen" class="skeleton">Bs. 000 por apartamento</small></article>
+      </section>
+      <section class="section-grid" id="resumen">
+        <article class="panel expense-panel hover-3d">
+          <div class="panel-heading"><div><p class="eyebrow">TRANSPARENCIA</p><h2>Presupuesto del mes</h2></div><span class="month skeleton" id="mes-presupuesto">CARGANDO</span></div>
+          <div class="expenses">
+            <div class="skeleton"><span>Cargando datos...</span><b>$00.00</b></div>
+            <div class="skeleton"><span>Cargando datos...</span><b>$00.00</b></div>
+            <div class="skeleton"><span>Cargando datos...</span><b>$00.00</b></div>
+          </div>
+          <footer><span>Total presupuestado</span><strong id="total-presupuesto" class="skeleton">000.00</strong></footer>
+        </article>
+        <article class="panel status-panel hover-3d">
+          <p class="eyebrow">COBRANZA</p><h2>Estado de pagos</h2>
+          <div class="progress-ring"><div><strong id="porcentaje-cobrado" class="skeleton">0%</strong><span id="pagos-aprobados" class="skeleton">recibido</span></div></div>
+          <p class="status-copy">El control de los pagos se actualiza luego de validar cada comprobante.</p>
+        </article>
+      </section>
+      <section class="rate-panel hover-3d" id="tasa">
+        <div>
+          <p class="eyebrow">REFERENCIA CAMBIARIA</p>
+          <h2>Tasa BCV del período</h2>
+          <p>Usa esta referencia para calcular el equivalente en bolívares de tu cuota mensual.</p>
+        </div>
+        <div class="rate-value">
+          <span>Dólar estadounidense</span>
+          <strong id="tasa-bcv-card" class="skeleton">Bs. 000/$</strong>
+          <small>Verifica la tasa antes de realizar tu pago.</small>
+        </div>
+      </section>
+      <section class="gallery">
+        <div><p class="eyebrow">NUESTRA COMUNIDAD</p><h2>Residencias Andrés Bello</h2><p>Un espacio para mantener informados a los vecinos y mostrar la vida de nuestra comunidad.</p></div>
+        <div class="gallery-grid"><figure><img src="imagenes/condominio-1.jpg" alt="Fachada de Residencias Andrés Bello"/><figcaption>Fachada principal</figcaption></figure><figure><img src="imagenes/condominio-2.jpg" alt="Áreas comunes de Residencias Andrés Bello"/><figcaption>Áreas comunes</figcaption></figure><figure><img src="imagenes/condominio-3.jpg" alt="Vista de Residencias Andrés Bello"/><figcaption>Nuestra torre</figcaption></figure></div>
+      </section>
+      <section class="help hover-3d" id="contacto">
+        <div><span class="help-icon">?</span><div><h2>¿Necesitas ayuda?</h2><p>Para consultas sobre tu cuota, pagos o comprobantes, comunícate con la administración de Torre A.</p></div></div>
+        <a class="button outline" href="mailto:administracion@residenciasandresbello.com">Contactar administración</a>
+      </section>
+    </main>
+    <footer>© 2026 Residencias Andrés Bello · Torre A</footer>
+    <script src="script.js?v=9"></script>
+    <script src="chatbot.js?v=2"></script>
+  </body>
 </html>
