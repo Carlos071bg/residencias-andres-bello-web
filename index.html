@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Residencias Andrés Bello</title>
+  <meta name="description" content="Portal oficial de Residencias Andrés Bello. Información clara y transparente para todos los residentes." />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --mint: #14b899;
+      --mint-dark: #087965;
+      --navy: #123450;
+      --light: #f5f7f5;
+    }
+    body, html { margin: 0; padding: 0; font-family: 'Inter', sans-serif; background: var(--light); color: var(--navy); }
+    
+    /* Barra Superior para el Administrador */
+    .top-nav {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      padding: 25px 40px;
+      display: flex;
+      justify-content: flex-end;
+      z-index: 10;
+    }
+    .admin-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: white;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 10px 18px;
+      border-radius: 50px;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s;
+    }
+    .admin-btn:hover { background: rgba(255, 255, 255, 0.3); }
+
+    /* Hero Section con tu imagen */
+    .hero {
+      position: relative;
+      height: 75vh;
+      min-height: 500px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      background: url('imagenes/condominio-1.jpg') center/cover no-repeat;
+    }
+    
+    /* Filtro oscuro encima de la foto */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(18, 52, 80, 0.75), rgba(18, 52, 80, 0.95));
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 850px;
+      padding: 20px;
+      animation: fadeInUp 1s ease-out;
+    }
+    
+    .hero h1 { font-size: clamp(2.8rem, 6vw, 4.8rem); font-weight: 900; margin-bottom: 24px; line-height: 1.1; letter-spacing: -1.5px; }
+    .hero p { font-size: clamp(1.1rem, 2vw, 1.4rem); margin-bottom: 45px; color: #e2e8f0; line-height: 1.6; max-width: 700px; margin-left: auto; margin-right: auto; }
+    
+    .btn {
+      display: inline-block;
+      padding: 18px 36px;
+      background: var(--mint);
+      color: white;
+      text-decoration: none;
+      font-size: 1.25rem;
+      font-weight: 700;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 25px rgba(20, 184, 153, 0.4);
+    }
+    .btn:hover { background: var(--mint-dark); transform: translateY(-4px); box-shadow: 0 15px 35px rgba(20, 184, 153, 0.5); }
+    
+    /* Tarjetas de características */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      max-width: 1100px;
+      margin: -80px auto 80px;
+      padding: 0 24px;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .feature-card {
+      background: white;
+      padding: 45px 35px;
+      border-radius: 24px;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+    }
+    .feature-card:hover { transform: translateY(-12px); box-shadow: 0 30px 60px rgba(0,0,0,0.12); }
+    
+    .icon {
+      font-size: 3.5rem;
+      margin-bottom: 24px;
+      display: inline-block;
+      background: #e6f8f5;
+      width: 90px;
+      height: 90px;
+      line-height: 90px;
+      border-radius: 50%;
+      color: var(--mint-dark);
+    }
+    
+    .feature-card h3 { margin: 0 0 16px; font-size: 1.5rem; color: var(--navy); letter-spacing: -0.5px; }
+    .feature-card p { margin: 0; color: #64748b; line-height: 1.7; font-size: 1.05rem; }
+    
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    footer { text-align: center; padding: 40px 20px; color: #94a3b8; font-size: 0.95rem; }
+  </style>
+</head>
+<body>
+
+  <!-- Navegación superior con botón Admin -->
+  <nav class="top-nav">
+    <!-- ATENCIÓN: Cambia este enlace por el link real de tu Google Sites Privado -->
+    <a href="https://sites.google.com/view/gestion-rab/p%C3%A1gina-principal?pli=1&authuser=5" class="admin-btn">
+      🔒 Acceso Administrador
+    </a>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-content">
+      <h1>Bienvenidos a<br>Residencias Andrés Bello</h1>
+      <p>Información clara para los residentes de la Torre A: presupuesto mensual, pagos y comprobantes en un solo lugar de manera 100% transparente.</p>
+      <!-- Botón principal para los residentes -->
+      <a href="dashboard.html" class="btn">Entrar al Portal de Residentes &rarr;</a>
+    </div>
+  </header>
+
+  <section class="features">
+    <div class="feature-card">
+      <div class="icon">📊</div>
+      <h3>Presupuesto Mensual</h3>
+      <p>Revisa el desglose exacto de los gastos del mes y la cuota correspondiente a cada apartamento, calculado en tiempo real.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">💸</div>
+      <h3>Reportar Pago</h3>
+      <p>Envía tus comprobantes de transferencia de manera rápida y segura directamente desde tu celular o computadora.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">✅</div>
+      <h3>Transparencia Total</h3>
+      <p>Monitorea el estado de recaudación de la torre y verifica al instante si tu pago ha sido procesado y validado.</p>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2026 Residencias Andrés Bello · Torre A. Administrado con tecnología web moderna.
+  </footer>
+
+</body>
+</html>
