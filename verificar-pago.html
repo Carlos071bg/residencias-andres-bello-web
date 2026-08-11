@@ -42,18 +42,6 @@
     <label for="mes">Mes a pagar</label>
     <select id="mes">
       <option value="">Selecciona el mes</option>
-      <option value="enero">Enero 2026</option>
-      <option value="febrero">Febrero 2026</option>
-      <option value="marzo">Marzo 2026</option>
-      <option value="abril">Abril 2026</option>
-      <option value="mayo">Mayo 2026</option>
-      <option value="junio">Junio 2026</option>
-      <option value="julio">Julio 2026</option>
-      <option value="agosto">Agosto 2026</option>
-      <option value="septiembre">Septiembre 2026</option>
-      <option value="octubre">Octubre 2026</option>
-      <option value="noviembre">Noviembre 2026</option>
-      <option value="diciembre">Diciembre 2026</option>
     </select>
     
     <button class="btn" id="verificar-btn" onclick="verificar()">Verificar y continuar</button>
@@ -67,13 +55,33 @@
     var ENDPOINT = "https://script.google.com/macros/s/AKfycbyM3Z3dYBaQcaKEdn588WaTM7wKp_8zE9KHqNciKmfNoqFx76-9TtV8EjHvx8OyVtrG9w/exec";
     var FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSe9DGuaUtaWF4WO4DJ9DgAh0t8BMmfnsXHeLed1Wag_UKDj8g/viewform?usp=header";
 
-    // Generar opciones de apartamentos (1-25)
+    // 1. Generar opciones de apartamentos (1-25)
     var selectApto = document.getElementById("apto");
     for (var i = 1; i <= 25; i++) {
       var opt = document.createElement("option");
       opt.value = i;
       opt.textContent = "Apartamento " + i;
       selectApto.appendChild(opt);
+    }
+
+    // 2. Generar opciones de meses dinamicamente (desde Agosto 2026 hasta el mes actual + 1)
+    var selectMes = document.getElementById("mes");
+    var mesesNombres = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+    
+    var fechaInicio = new Date(2026, 7); // Agosto (mes 7) de 2026
+    var fechaActual = new Date();
+    
+    // Calcular cuantos meses han pasado desde Agosto 2026 hasta hoy, y le sumamos 1 mes extra hacia adelante
+    var mesesTotales = (fechaActual.getFullYear() - 2026) * 12 + (fechaActual.getMonth() - 7) + 1;
+    if (mesesTotales < 1) mesesTotales = 1; // Mínimo mostrar agosto
+    
+    for (var m = 0; m <= mesesTotales; m++) {
+      var d = new Date(2026, 7 + m);
+      var nombreMes = mesesNombres[d.getMonth()] + " " + d.getFullYear(); // "Agosto 2026"
+      var optMes = document.createElement("option");
+      optMes.value = nombreMes; // Se envía el nombre completo
+      optMes.textContent = nombreMes;
+      selectMes.appendChild(optMes);
     }
 
     function verificar() {
@@ -90,9 +98,9 @@
 
       btn.disabled = true;
       resultado.className = "result loading";
-      resultado.innerHTML = '<span class="spinner"></span> Verificando...';
+      resultado.innerHTML = '<span class="spinner"></span> Verificando en el sistema...';
 
-      fetch(ENDPOINT + "?action=verificar&apto=" + apto + "&mes=" + mes + "&t=" + Date.now())
+      fetch(ENDPOINT + "?action=verificar&apto=" + encodeURIComponent(apto) + "&mes=" + encodeURIComponent(mes) + "&t=" + Date.now())
         .then(function(r) { return r.json(); })
         .then(function(data) {
           if (data.duplicado) {
@@ -107,9 +115,9 @@
           }
           btn.disabled = false;
         })
-        .catch(function() {
+        .catch(function(e) {
           resultado.className = "result error";
-          resultado.textContent = "Error de conexion. Intenta de nuevo.";
+          resultado.textContent = "Error de conexión con la base de datos. Avisa a la administración.";
           btn.disabled = false;
         });
     }
