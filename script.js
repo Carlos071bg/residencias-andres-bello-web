@@ -8,9 +8,6 @@ document.querySelectorAll(".scroll-link").forEach((link) => {
   });
 });
 
-// Pega aquÃ­ la URL /exec de tu aplicaciÃ³n web de Apps Script despuÃ©s de desplegarla.
-// Mientras estÃ© vacÃ­a, la web conserva los Ãºltimos valores visibles.
-// Reloj visible del portal. Usa siempre la zona horaria de Venezuela.
 const actualizarFechaHora = () => {
   const nodo = document.getElementById("fecha-hora-actual");
   if (!nodo) return;
@@ -31,7 +28,7 @@ const actualizarFechaHora = () => {
     hour12: false,
   }).format(ahora);
 
-  nodo.textContent = `${fecha} Â· ${hora}`;
+  nodo.textContent = `${fecha} · ${hora}`;
 };
 
 actualizarFechaHora();
@@ -51,14 +48,14 @@ if (ENDPOINT_PRESUPUESTO) {
       poner("tasa-bcv", `Tasa BCV: ${bs(datos.tasaBcv)}/$`);
       poner("tasa-bcv-card", `${bs(datos.tasaBcv)}/$`);
       const periodo = String(datos.periodo || "").trim();
-      const mes = periodo ? periodo.split(" ")[0].toUpperCase() : "PERÃODO ACTIVO";
-      poner("periodo-hero", `ADMINISTRACIÃ“N Â· ${periodo ? periodo.toUpperCase() : "PERÃODO ACTIVO"}`);
+      const mes = periodo ? periodo.split(" ")[0].toUpperCase() : "PERÍODO ACTIVO";
+      poner("periodo-hero", `ADMINISTRACIÓN · ${periodo ? periodo.toUpperCase() : "PERÍODO ACTIVO"}`);
       poner("mes-presupuesto", mes);
       poner("fecha-limite", datos.fechaLimite || "Fecha por definir");
       poner("apartamentos", datos.apartamentos || 0);
-      poner("presupuesto-usd", usd(datos.totalUsd)); poner("presupuesto-bs", `${bs(datos.totalBs)} Â· ${periodo || "Actualizado desde Sheets"}`);
+      poner("presupuesto-usd", usd(datos.totalUsd)); poner("presupuesto-bs", `${bs(datos.totalBs)} · ${periodo || "Actualizado desde Sheets"}`);
       poner("cuota-usd-resumen", usd(datos.cuotaUsd)); poner("cuota-bs-resumen", `${bs(datos.cuotaBs)} por apartamento`);
-      poner("total-presupuesto", `${usd(datos.totalUsd)} Â· ${bs(datos.totalBs)}`);
+      poner("total-presupuesto", `${usd(datos.totalUsd)} · ${bs(datos.totalBs)}`);
       poner("porcentaje-cobrado", `${datos.porcentajeCobrado}%`);
       poner("pagos-aprobados", datos.pagosAprobados === 1 ? "1 pago aprobado" : `${datos.pagosAprobados} pagos aprobados`);
       const listaGastos = document.querySelector(".expenses");
@@ -68,7 +65,7 @@ if (ENDPOINT_PRESUPUESTO) {
           const concepto = document.createElement("span");
           const monto = document.createElement("b");
           concepto.textContent = gasto.concepto;
-          monto.textContent = `${usd(gasto.usd)} Â· ${bs(gasto.bs)}`;
+          monto.textContent = `${usd(gasto.usd)} · ${bs(gasto.bs)}`;
           fila.append(concepto, monto);
           return fila;
         }));
@@ -76,21 +73,19 @@ if (ENDPOINT_PRESUPUESTO) {
     })
     .catch(() => {
       console.warn("No se pudo actualizar el presupuesto desde Google Sheets.");
-      poner("periodo-hero", "ADMINISTRACIÃ“N Â· ERROR DE CONEXIÃ“N");
+      poner("periodo-hero", "ADMINISTRACIÓN · ERROR DE CONEXIÓN");
       poner("mes-presupuesto", "SIN DATOS");
       poner("tasa-bcv", "Tasa BCV: No disponible");
       poner("tasa-bcv-card", "No disponible");
-      poner("fecha-limite", "Error de conexiÃ³n");
+      poner("fecha-limite", "Error de conexión");
     });
 }
-
-
 
 // --- CÓDIGO DEL CHATBOT BELLOBOT ---
 const injectChatbot = () => {
   // 1. Inyectar estilos CSS
   const style = document.createElement('style');
-  style.textContent = 
+  style.textContent = `
     #bellobot-container { position: fixed; bottom: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; align-items: flex-end; font-family: 'Inter', sans-serif; }
     #bellobot-mascot { width: 70px; height: 70px; cursor: pointer; animation: float 3s ease-in-out infinite; transition: transform 0.3s; margin-top: 15px; }
     #bellobot-mascot:hover { transform: scale(1.1); }
@@ -127,13 +122,13 @@ const injectChatbot = () => {
     .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
     @keyframes typing { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
     @media (max-width: 480px) { #bellobot-chat-window { width: 85vw; height: 60vh; bottom: 80px; right: 20px; position: fixed; } }
-  ;
+  `;
   document.head.appendChild(style);
 
   // 2. Inyectar HTML
   const chatContainer = document.createElement('div');
   chatContainer.id = 'bellobot-container';
-  chatContainer.innerHTML = \
+  chatContainer.innerHTML = `
     <div id="bellobot-chat-window" class="hidden">
       <div class="chat-header">
         <h4>BelloBot 🤖</h4>
@@ -156,7 +151,7 @@ const injectChatbot = () => {
         <div class="prompt-symbol">&gt;_</div>
       </div>
     </div>
-  \;
+  `;
   document.body.appendChild(chatContainer);
 
   // 3. Lógica del Chatbot
