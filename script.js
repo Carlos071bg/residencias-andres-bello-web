@@ -89,7 +89,15 @@ if (ENDPOINT_PRESUPUESTO) {
       
       poner("periodo-hero", "ADMINISTRACION \u00b7 " + (periodo ? periodo.toUpperCase() : "PERIODO ACTIVO"));
       poner("mes-presupuesto", mes);
-      poner("fecha-limite", datos.fechaLimite || "Fecha por definir");
+      var fechaRaw = datos.fechaLimite || "";
+      var fechaFormateada = "Fecha por definir";
+      if (fechaRaw) {
+        try {
+          var fechaObj = new Date(fechaRaw);
+          fechaFormateada = new Intl.DateTimeFormat("es-VE", { timeZone: "America/Caracas", day: "numeric", month: "long", year: "numeric" }).format(fechaObj);
+        } catch(e) { fechaFormateada = fechaRaw; }
+      }
+      poner("fecha-limite", fechaFormateada);
       poner("apartamentos", datos.apartamentos || 0);
       poner("presupuesto-usd", usd(datos.totalUsd)); 
       poner("presupuesto-bs", bs(datos.totalBs) + " \u00b7 " + (periodo || "Actualizado desde Sheets"));
