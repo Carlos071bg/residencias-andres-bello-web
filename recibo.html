@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comprobante de Pago - Torre A</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --mint: #14b899;
+      --mint-dark: #087965;
+      --navy: #123450;
+      --light: #f5f7f5;
+    }
+    * { box-sizing: border-box; }
+    body, html { margin: 0; padding: 0; font-family: 'Inter', sans-serif; background: #e2e8f0; color: var(--navy); display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+    .container { background: white; padding: 40px; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); width: 100%; max-width: 500px; }
+    h1 { margin-top: 0; font-size: 1.8rem; text-align: center; }
+    p { text-align: center; color: #64748b; margin-bottom: 30px; line-height: 1.5; }
+    .form-group { margin-bottom: 20px; }
+    label { display: block; margin-bottom: 8px; font-weight: 600; }
+    select { width: 100%; padding: 12px; border: 2px solid #cbd5e1; border-radius: 10px; font-size: 1rem; outline: none; transition: border-color 0.3s; }
+    select:focus { border-color: var(--mint); }
+    button { width: 100%; padding: 15px; background: var(--mint); color: white; border: none; border-radius: 10px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: background 0.3s; }
+    button:hover { background: var(--mint-dark); }
+    button:disabled { background: #94a3b8; cursor: not-allowed; }
+    .error { color: #ef4444; text-align: center; margin-top: 15px; font-weight: 600; }
+    
+    /* Recibo Styles */
+    #recibo-box { display: none; margin-top: 30px; border: 2px dashed #cbd5e1; padding: 25px; border-radius: 15px; background: #fafafa; }
+    .recibo-header { text-align: center; border-bottom: 1px solid #cbd5e1; padding-bottom: 15px; margin-bottom: 15px; }
+    .recibo-header h2 { margin: 0; font-size: 1.5rem; color: var(--navy); }
+    .recibo-header p { margin: 5px 0 0; font-size: 0.9rem; }
+    .recibo-row { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 1rem; }
+    .recibo-row strong { color: var(--navy); }
+    .recibo-total { border-top: 1px solid #cbd5e1; margin-top: 15px; padding-top: 15px; font-size: 1.2rem; font-weight: 900; }
+    .status-badge { display: inline-block; padding: 4px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; color: white; }
+    .status-aprobado { background: #10b981; }
+    .status-pendiente { background: #f59e0b; }
+    .print-btn { background: var(--navy); margin-top: 20px; }
+    .print-btn:hover { background: #0f2940; }
+
+    @media print {
+      body { background: white; }
+      .container { box-shadow: none; padding: 0; }
+      #form-section, .print-btn { display: none; }
+      #recibo-box { display: block; border: 2px solid black; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div id="form-section">
+      <h1>Generar Recibo 📄</h1>
+      <p>Selecciona tu apartamento para generar y descargar el comprobante de tu último pago reportado.</p>
+      
+      <div class="form-group">
+        <label for="apto">Número de Apartamento</label>
+        <select id="apto">
+          <!-- Opciones dinámicas excluyendo el 11 -->
+        </select>
+      </div>
+      
+      <button id="btn-generar">Generar Recibo</button>
+      <div id="error-msg" class="error"></div>
+    </div>
+
+    <div id="recibo-box">
+      <div class="recibo-header">
+        <h2>Recibo de Pago</h2>
+        <p>Residencias Andrés Bello · Torre A</p>
+      </div>
+      <div class="recibo-row">
+        <span>Apartamento:</span>
+        <strong id="r-apto">--</strong>
+      </div>
+      <div class="recibo-row">
+        <span>Fecha de Pago:</span>
+        <strong id="r-fecha">--</strong>
+      </div>
+      <div class="recibo-row">
+        <span>N° de Referencia:</span>
+        <strong id="r-ref">--</strong>
+      </div>
+      <div class="recibo-row">
+        <span>Estado:</span>
+        <span id="r-estado" class="status-badge">--</span>
+      </div>
+      <div class="recibo-row recibo-total">
+        <span>Monto Registrado:</span>
+        <strong id="r-monto">--</strong>
+      </div>
+      
+      <button class="print-btn" onclick="window.print()">🖨️ Imprimir / Guardar PDF</button>
+      <button onclick="location.reload()" style="background:transparent; color:var(--navy); margin-top:10px; border:1px solid var(--navy);">Consultar otro apartamento</button>
+    </div>
+  </div>
+
+  <script>
+    var ENDPOINT = "https://script.google.com/macros/s/AKfycbyM3Z3dYBaQcaKEdn588WaTM7wKp_8zE9KHqNciKmfNoqFx76-9TtV8EjHvx8OyVtrG9w/exec";
+    
+    // Generar apartamentos sin el 11
+    var selectApto = document.getElementById("apto");
+    var pisos = [1, 2, 3, 4, 5, 6];
+    var aptosPorPiso = [1, 2, 3, 4];
+    
+    pisos.forEach(function(piso) {
+      aptosPorPiso.forEach(function(numero) {
+        var aptoStr = piso.toString() + numero.toString();
+        if (aptoStr !== "11") {
+          var opt = document.createElement("option");
+          opt.value = aptoStr;
+          opt.textContent = "Apartamento " + aptoStr;
+          selectApto.appendChild(opt);
+        }
+      });
+    });
+
+    document.getElementById("btn-generar").addEventListener("click", function() {
+      var apto = selectApto.value;
+      var btn = this;
+      var errorMsg = document.getElementById("error-msg");
+      
+      btn.disabled = true;
+      btn.textContent = "Buscando pago...";
+      errorMsg.textContent = "";
+
+      fetch(ENDPOINT + "?action=recibo&apto=" + encodeURIComponent(apto) + "&t=" + Date.now())
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+          if (data.encontrado) {
+            document.getElementById("form-section").style.display = "none";
+            document.getElementById("recibo-box").style.display = "block";
+            
+            document.getElementById("r-apto").textContent = data.apto;
+            document.getElementById("r-fecha").textContent = data.fecha;
+            document.getElementById("r-ref").textContent = data.referencia;
+            document.getElementById("r-monto").textContent = "$" + data.monto;
+            
+            var estadoBadge = document.getElementById("r-estado");
+            estadoBadge.textContent = data.estado;
+            estadoBadge.className = "status-badge"; // reset
+            if(data.estado.toUpperCase() === "APROBADO" || data.estado.toUpperCase() === "PAGADO") {
+                estadoBadge.classList.add("status-aprobado");
+            } else {
+                estadoBadge.classList.add("status-pendiente");
+            }
+          } else {
+            errorMsg.textContent = data.error || "No se encontró un pago registrado para este apartamento en el mes actual.";
+            btn.disabled = false;
+            btn.textContent = "Generar Recibo";
+          }
+        })
+        .catch(function() {
+          errorMsg.textContent = "Error de conexión. Intenta de nuevo.";
+          btn.disabled = false;
+          btn.textContent = "Generar Recibo";
+        });
+    });
+  </script>
+</body>
+</html>
